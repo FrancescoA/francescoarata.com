@@ -43,10 +43,14 @@ import { Font } from "astro:assets";
             <li>Python</li>
             <li>SQL</li>
             <li>TypeScript</li>
+            <li>R</li>
+            <li>VBA</li>
             <li>Java</li>
             <li>JS</li>
-            <li>HTML/CSS</li>
+            <li>HTML</li>
+            <li>CSS</li>
             <!-- <li class="learning">C++</li> -->
+            <li>LLM</li>
             <li class="learning">ML</li>
           </ul>
 
@@ -63,8 +67,12 @@ import { Font } from "astro:assets";
           <hr />
 
           <ul class="tools">
-            <li>Excel</li>
             <li>Git</li>
+            <li>Pandas</li>
+            <li>PyTorch</li>
+            <li>Keras</li>
+            <li>NumPy</li>
+            <li>Excel</li>
           </ul>
         </section>
 
@@ -74,6 +82,8 @@ import { Font } from "astro:assets";
             <li>Stochastics</li>
             <li>Machine Learning</li>
             <li>Quantitative Modeling</li>
+            <li>Algorithms</li>
+            <li>Simulations</li>
             <li>Data Analysis</li>
             <li>Data Engineering</li>
           </ul>
@@ -83,9 +93,8 @@ import { Font } from "astro:assets";
           <ul class="hobby">
             <li>Math</li>
             <li>Languages</li>
-            <li>Historical Linguistics</li>
             <li>Words</li>
-            <li>Sudoku</li>
+            <li>Historical Linguistics</li>
             <li>Food🍕</li>
             <li>Cycletouring</li>
           </ul>
@@ -93,7 +102,7 @@ import { Font } from "astro:assets";
 
         <section class="projects">
           <h2>Projects</h2>
-          <p class="loading">Loading...</p>
+          <p class="loading"></p>
         </section>
 
         <section class="contact">
@@ -105,16 +114,16 @@ import { Font } from "astro:assets";
           <div class="position">📍 Milan, Italy</div>
         </section>
 
-        <section class="about">
+        <!-- <section class="about">
           <div id="about"></div>
           <h2>About me</h2>
           <p class="loading">Loading...</p>
-        </section>
-
+        </section> -->
+<!-- 
         <section class="articles">
           <h2>Articles</h2>
           <p class="loading">Loading...</p>
-        </section>
+        </section> -->
       </div>
     </div>
 
@@ -123,6 +132,10 @@ import { Font } from "astro:assets";
 </html>
 
 <style>
+::-webkit-scrollbar {
+    display: none;
+}
+
   /* *,
   *::before,
   *::after {
@@ -166,15 +179,12 @@ import { Font } from "astro:assets";
 
   body {
     background-color: #030712;
+    margin: 0;
   }
 
   ul {
     list-style-type: none;
     padding: 0;
-  }
-
-  body {
-    margin: 0;
   }
 
   section {
@@ -243,6 +253,7 @@ import { Font } from "astro:assets";
     animation: infinite-rotation 2s linear infinite;
   }
 
+
   section hr {
     display: block;
     height: 1px;
@@ -251,6 +262,7 @@ import { Font } from "astro:assets";
     width: 40%;
     padding: 0;
   }
+
 
   .info section > ul li {
     background-color: #4f95ff56;
@@ -274,17 +286,18 @@ import { Font } from "astro:assets";
   }
 
   .info {
-    min-width: 0;
+    /* min-width: 0; */
+    width: 50% !important;
     margin-inline: auto;
     display: grid;
     grid-template-areas:
-      "about     about     about       contact     contact"
-      "skills    skills    interests   interests   interests"
-      "projects  projects  projects    articles    articles";
+      ". contact contact ."
+      "skills skills interests interests"
+      ". projects projects .";
 
-    grid-template-columns: repeat(5, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
 
-    width: 50%;
+    width: 65%;
   }
 
   .projects,
@@ -363,81 +376,85 @@ import { Font } from "astro:assets";
     row-gap: 1rem;
   }
 
+
   @media (max-width: 1600px) {
     .info {
-      width: 65%;
+      width: 65% !important;
       padding: 0 1.75rem;
       grid-template-columns: minmax(0, 1fr);
       row-gap: 1rem;
       grid-template:
-        ". about about about ."
+        /* ". about about about ." */
         ". contact contact contact ."
         "skills skills interests interests interests"
         "skills skills interests interests interests"
         ". projects projects projects ."
-        ". articles articles articles .";
+        /* ". articles articles articles ."; */
     }
   }
 
+
+
   @media (max-width: 1050px) {
     .info {
-      width: 55%;
+      width: 55% !important;
       padding: 0 1.75rem;
       grid-template-columns: minmax(0, 1fr);
       row-gap: 1rem;
       grid-template:
-        "about"
+        /* "about" */
         "contact"
         "skills"
         "interests"
         "projects"
-        "articles";
+        /* "articles"; */
     }
   }
 
   @media (max-width: 750px) {
     .info {
-      width: auto;
+      width: auto !important;
       padding: 0 1.75rem;
       grid-template-columns: minmax(0, 1fr);
       row-gap: 1rem;
       grid-template:
-        "about about about about about"
+        /* "about about about about about" */
         ". contact contact contact ."
         "skills skills skills skills skills"
         "interests interests interests interests interests"
         "projects projects projects projects projects"
-        "articles articles articles articles articles";
+        /* "articles articles articles articles articles"; */
     }
   }
 
   @media (max-width: 650px) {
     .info {
-      width: auto;
+      width: auto !important;
       padding: 0 1.75rem;
       grid-template-columns: minmax(0, 1fr);
       row-gap: 1rem;
       grid-template:
-        "about"
+        /* "about" */
         "contact"
         "skills"
         "interests"
         "projects"
-        "articles";
+        /* "articles"; */
     }
   }
+
+
 </style>
 
 <script>
   let loadingTexts = document.getElementsByClassName("loading");
   let dots = ["", ".", "..", "..."];
-  dots = dots.reverse();
 
   let index = 0;
 
   function animateLoadingDots() {
     for (const text of loadingTexts) {
-      text.textContent = "Loading" + dots[index];
+      text.textContent = "Soon to display" + dots[index];
       index = (index + 1) % dots.length;
     }
   }
