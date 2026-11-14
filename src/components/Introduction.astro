@@ -37,6 +37,7 @@
 </div>
 
 <style>
+  
   .intro-wrapper {
     display: flex;
     flex-direction: column;
@@ -180,7 +181,7 @@
   const greetings = ["Ciao!", "Hi there!", "Salut!", "Hallo!", chineseGreeting];
 
   let greetingIndex = 0;
-  let hideTimer;
+  let hideTimer: number | undefined;
 
   const visibleDuration = 500;
 
