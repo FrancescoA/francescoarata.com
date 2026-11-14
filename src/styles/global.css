@@ -1,0 +1,25 @@
+/* UTIL */
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+@keyframes infinite-rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+body {
+  background-color: #030712;
+  margin: 0;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
