@@ -33,7 +33,7 @@ import { Font } from "astro:assets";
   <body>
     <Introduction />
 
-    <button id="button" class="button"> > </button>
+    <button id="scroll-button" class="scroll-button"> > </button>
 
     <div class="box-wrapper">
       <div class="info">
@@ -81,7 +81,7 @@ import { Font } from "astro:assets";
           <ul class="profession">
             <li>Stochastics</li>
             <li>Machine Learning</li>
-            <li>Quantitative Modeling</li>
+            <li class="wrapped">Quantitative Modeling</li>
             <li>Algorithms</li>
             <li>Simulations</li>
             <li>Data Analysis</li>
@@ -94,7 +94,7 @@ import { Font } from "astro:assets";
             <li>Math</li>
             <li>Languages</li>
             <li>Words</li>
-            <li>Historical Linguistics</li>
+            <li class="wrapped">Historical Linguistics</li>
             <li>Food🍕</li>
             <li>Cycletouring</li>
           </ul>
@@ -114,16 +114,6 @@ import { Font } from "astro:assets";
           <div class="position">📍 Milan, Italy</div>
         </section>
 
-        <!-- <section class="about">
-          <div id="about"></div>
-          <h2>About me</h2>
-          <p class="loading">Loading...</p>
-        </section> -->
-<!-- 
-        <section class="articles">
-          <h2>Articles</h2>
-          <p class="loading">Loading...</p>
-        </section> -->
       </div>
     </div>
 
@@ -132,27 +122,36 @@ import { Font } from "astro:assets";
 </html>
 
 <style>
-::-webkit-scrollbar {
-    display: none;
-}
 
-  /* *,
-  *::before,
-  *::after {
-    box-sizing: border-box;
+  /* UTIL */
+
+  ::-webkit-scrollbar {
+      display: none;
   }
 
-  html,
+  @-webkit-keyframes infinite-rotation {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
   body {
+    background-color: #030712;
     margin: 0;
+  }
+
+  ul {
+    list-style-type: none;
     padding: 0;
-    width: 100%;
-    height: 100%;
-    scroll-behavior: smooth;
-    scroll-snap-type: proximity;
-    user-select: none;
-    -webkit-tap-highlight-color: transparent;
-  } */
+  }
+
+
+
+  /* GRID CELL ASSIGNMENTS */
+
   .skills {
     grid-area: skills;
   }
@@ -177,15 +176,34 @@ import { Font } from "astro:assets";
     grid-area: articles;
   }
 
-  body {
-    background-color: #030712;
-    margin: 0;
+
+
+  /* WRAPPERS */
+
+  .box-wrapper {
+    width: 100%;
+    min-width: 0;
+    margin-bottom: 15rem;
   }
 
-  ul {
-    list-style-type: none;
-    padding: 0;
+
+  .info {
+    scroll-margin-top: 4rem;
+    row-gap: 1rem;
+    width: 50% !important;
+    margin-inline: auto;
+    display: grid;
+    grid-template-areas:
+      ". contact contact ."
+      "skills skills interests interests"
+      ". projects projects .";
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    width: 65%;
   }
+
+
+
+  /* SECTIONS */
 
   section {
     margin: 2rem;
@@ -200,19 +218,28 @@ import { Font } from "astro:assets";
     color: rgb(255, 208, 0);
     margin-bottom: 1rem;
     font-family: monospace;
+    margin-bottom: 2.5rem;
+    text-decoration: underline;
+    text-align: center;
+    font-size: 1.4rem;
   }
 
-  @-webkit-keyframes infinite-rotation {
-    0% {
-      transform: rotate(0deg);
-    }
-
-    100% {
-      transform: rotate(360deg);
-    }
+  section > ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    container-type: inline-size;
+    gap: 0.3rem;
   }
 
-  section li {
+  section ul > li {
+    width: max-content;
+    max-width: 100%;
+    position: relative;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 0.25rem;
+    white-space: normal;
     color: #ffffff;
     font-size: 1rem;
     font-family: monospace;
@@ -221,28 +248,20 @@ import { Font } from "astro:assets";
     line-height: 1.5rem;
     align-items: center;
     justify-content: center;
-    position: relative;
     cursor: default;
     user-select: none;
+    background-color: #4f95ff56;
+    text-align: center;
+    padding: 0.4rem 0.7rem;
+    transition: background-color 0.3s;
   }
 
-  section > ul {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.3rem;
+  section > ul li:hover {
+    background-color: #104594;
+    transition: background-color 0.2s;
   }
 
-  section ul > li {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.4);
-  }
-
-  section > h2 {
-    margin-bottom: 2.5rem;
-    text-decoration: underline;
-  }
-
-  li.learning::after {
+  section ul li.learning::after {
     content: "⚙️";
     display: block;
     font-size: 1.1rem;
@@ -250,9 +269,8 @@ import { Font } from "astro:assets";
     top: -0.45rem;
     right: -0.6rem;
     color: #21b9ff;
-    animation: infinite-rotation 2s linear infinite;
+    animation: infinite-rotation 3.5s linear infinite;
   }
-
 
   section hr {
     display: block;
@@ -263,58 +281,17 @@ import { Font } from "astro:assets";
     padding: 0;
   }
 
-
-  .info section > ul li {
-    background-color: #4f95ff56;
-    text-align: center;
-    padding: 0.4rem 0.7rem;
-    border-radius: 0.25rem;
-  }
-
-  .info section > ul li {
-    transition: background-color 0.3s;
-  }
-
-  .info section > ul li:hover {
-    background-color: #104594;
-    transition: background-color 0.2s;
-  }
-
-  section > h2 {
-    text-align: center;
-    font-size: 1.4rem;
-  }
-
-  .info {
-    /* min-width: 0; */
-    width: 50% !important;
-    margin-inline: auto;
-    display: grid;
-    grid-template-areas:
-      ". contact contact ."
-      "skills skills interests interests"
-      ". projects projects .";
-
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-
-    width: 65%;
-  }
-
-  .projects,
-  .contact,
-  .about,
-  .articles {
+  section.projects,
+  section.contact {
     color: white;
     font-family: monospace;
   }
 
-  .box-wrapper {
-    width: 100%;
-    min-width: 0;
-    margin-bottom: 15rem;
-  }
 
-  .button {
+
+  /* NAVIGATION SCROLL BUTTON */
+
+  .scroll-button {
     position: fixed;
     display: block;
     background-color: white;
@@ -338,29 +315,28 @@ import { Font } from "astro:assets";
     font-weight: 100;
   }
 
-  .button.hidden {
+  .scroll-button.hidden {
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
     transform: translateY(10px) rotate(90deg);
   }
 
-  .info {
-    scroll-margin-top: 4rem;
-  }
-  .button a {
+  .scroll-button a {
     display: block;
     line-height: 3rem;
   }
 
-  .contact .email .email-tag {
-    color: rgba(255, 255, 255, 0.712);
-  }
+
+
+  /* CONTACT */
 
   .contact .email-tag {
     font-size: 0.9rem;
     margin-bottom: 0.35rem;
+    color: rgba(255, 255, 255, 0.712);
   }
+
   .contact .email {
     font-size: 1.05rem;
     overflow-wrap: normal;
@@ -372,10 +348,9 @@ import { Font } from "astro:assets";
     font-size: 0.95rem;
   }
 
-  .info {
-    row-gap: 1rem;
-  }
 
+
+  /* DEVICE RESPONSIVENESS */
 
   @media (max-width: 1600px) {
     .info {
@@ -384,16 +359,12 @@ import { Font } from "astro:assets";
       grid-template-columns: minmax(0, 1fr);
       row-gap: 1rem;
       grid-template:
-        /* ". about about about ." */
         ". contact contact contact ."
         "skills skills interests interests interests"
         "skills skills interests interests interests"
         ". projects projects projects ."
-        /* ". articles articles articles ."; */
     }
   }
-
-
 
   @media (max-width: 1050px) {
     .info {
@@ -407,7 +378,6 @@ import { Font } from "astro:assets";
         "skills"
         "interests"
         "projects"
-        /* "articles"; */
     }
   }
 
@@ -418,12 +388,10 @@ import { Font } from "astro:assets";
       grid-template-columns: minmax(0, 1fr);
       row-gap: 1rem;
       grid-template:
-        /* "about about about about about" */
         ". contact contact contact ."
         "skills skills skills skills skills"
         "interests interests interests interests interests"
         "projects projects projects projects projects"
-        /* "articles articles articles articles articles"; */
     }
   }
 
@@ -434,17 +402,22 @@ import { Font } from "astro:assets";
       grid-template-columns: minmax(0, 1fr);
       row-gap: 1rem;
       grid-template:
-        /* "about" */
         "contact"
         "skills"
         "interests"
         "projects"
-        /* "articles"; */
     }
   }
 
+  @container (max-width: 230px) {
+    section ul > li.wrapped {
+        width: min-content;
+    }
+}
 
 </style>
+
+
 
 <script>
   let loadingTexts = document.getElementsByClassName("loading");
@@ -462,9 +435,9 @@ import { Font } from "astro:assets";
   setInterval(animateLoadingDots, 300);
   animateLoadingDots();
 
-  // navigation buttonv
+  // navigation scroll-button
 
-  const scrollButton = document.getElementById("button");
+  const scrollButton = document.getElementById("scroll-button");
   const target = document.querySelector(".info");
 
   if (scrollButton && target) {
