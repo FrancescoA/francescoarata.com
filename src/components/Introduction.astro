@@ -1,6 +1,10 @@
 ---
+import { getLang, useTranslations } from "../i18n/utils";
 
+const lang = getLang(Astro.currentLocale);
+const t = useTranslations(lang);
 ---
+
 
 <div class="intro-wrapper">
   <div class="introduction">
@@ -8,7 +12,7 @@
     <div class="menu">
       <div class="greeting">
         <span id="hand">🖐🏼</span>
-        <span id="greeting" class="visible">High five!</span>
+        <span id="greeting" class="visible">{t("home.introduction.high-five")}</span>
       </div>
 
       <h1 class="name">Francesco</h1>

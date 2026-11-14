@@ -9,4 +9,12 @@ export default defineConfig({
     cssVariable: "--font-inter",
   }],
 
+  i18n: {
+    locales: ["en", "it", "fr"],
+    defaultLocale: "en",
+    routing: {
+      prefixDefaultLocale: true,
+      redirectToDefaultLocale: true
+    }
+  }
 });

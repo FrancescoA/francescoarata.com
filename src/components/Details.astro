@@ -1,4 +1,5 @@
 ---
+
 ---
 
 <div class="box-wrapper">
@@ -316,39 +317,4 @@
 
   setInterval(animateLoadingDots, 300);
   animateLoadingDots();
-
-  // navigation scroll-button
-
-  const scrollButton = document.getElementById("scroll-button");
-  const target = document.querySelector(".info");
-
-  if (scrollButton && target) {
-    scrollButton.addEventListener("click", () => {
-      target.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-    });
-
-    function updateButtonVisibility() {
-      let targetPosition;
-      let targetReached;
-      if (target) {
-        targetPosition = target.getBoundingClientRect().top;
-        targetReached = targetPosition <= 100;
-      }
-
-      if (scrollButton) {
-        scrollButton.classList.toggle("hidden", targetReached);
-      }
-    }
-
-    window.addEventListener("scroll", updateButtonVisibility, {
-      passive: true,
-    });
-
-    window.addEventListener("resize", updateButtonVisibility);
-
-    updateButtonVisibility();
-  }
 </script>

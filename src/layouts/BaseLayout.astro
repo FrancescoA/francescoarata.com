@@ -1,0 +1,47 @@
+---
+import "../styles/global.css";
+
+import Footer from "../components/Footer.astro";
+import ScrollButton from "../components/ScrollButton.astro";
+import {Font} from "astro:assets";
+
+import {getLang} from "../i18n/utils";
+
+interface Props {
+    title: string;
+}
+
+const {title} = Astro.props;
+const lang = getLang(Astro.currentLocale);
+---
+
+<!doctype html>
+<html lang={lang}>
+	<head>
+			<title>{title}</title>
+			
+			<meta charset="UTF-8" />
+			<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+			<link rel="icon" href="/meerkat.png" />
+			
+			<meta name="generator" content={Astro.generator} />
+
+			<link rel="preconnect" href="https://fonts.googleapis.com" />
+			<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+			<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@900&display=swap"/>
+
+    	<Font cssVariable="--font-inter" />
+
+	</head>
+
+	<body>
+			<main>
+					<slot />
+			</main>
+
+			<ScrollButton />
+			<Footer />
+
+	</body>
+</html>
