@@ -9,37 +9,28 @@ import "../styles/global.css";
 <!doctype html>
 <html lang="en">
   <head>
+    <title>Francesco Arata</title>
+    <link rel="icon" href="/meerkat.png" />
+    
+    <meta name="generator" content={Astro.generator} />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
+    
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@900&display=swap"
-    />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@900&display=swap"
-    />
-    <link rel="icon" href="/meerkat.png" />
-    <meta name="generator" content={Astro.generator} />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@900&display=swap"/>
 
     <Font cssVariable="--font-inter" />
-    <title>Francesco Arata</title>
   </head>
 
   <body>
     <Introduction />
-
+    <Details />
+    <Footer />
+    
     <button id="scroll-button" class="scroll-button"> > </button>
 
-    <Details />
-
-    <Footer />
   </body>
 </html>
 
