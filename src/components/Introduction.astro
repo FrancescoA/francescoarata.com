@@ -3,12 +3,19 @@ import { getLang, useTranslations } from "../i18n/utils";
 
 const lang = getLang(Astro.currentLocale);
 const t = useTranslations(lang);
+
+const subtitles = [
+    t("home.introduction.math"),
+    t("home.introduction.data"),
+    t("home.introduction.languages"),
+    t("home.introduction.everything"),
+];
 ---
 
 
 <div class="intro-wrapper">
   <div class="introduction">
-    <p class="size">My 44 KB piece of Internet!</p>
+    <p class="size">{t("home.introduction.kilobytes")}</p>
     <div class="menu">
       <div class="greeting">
         <span id="hand">🖐🏼</span>
@@ -17,7 +24,7 @@ const t = useTranslations(lang);
 
       <h1 class="name">Francesco</h1>
       <h1 class="surname">Arata</h1>
-      <p id="subtitle"></p>
+      <p id="subtitle" data-subtitles={JSON.stringify(subtitles)}></p>
       <div class="description">
         <p>I am currently completing an M.Sc. in Mathematics, with a strong academic focus on stochastic calculus, stochastic processes, and advanced probability theory.</p>
         <p>I complemented my education with specific exams in quantitative risk management for banking and insurance, providing me with a theoretical foundation in risk measures and measurement, statistical methods, and financial and insurance products.</p>
@@ -159,11 +166,13 @@ const t = useTranslations(lang);
 </style>
 
 <script>
-  // handle subtitles loop
+  
+  // SUBTITLES LOOP HANDLER
 
   const subtitle = document.getElementById("subtitle");
+  const subtitles: string[] = JSON.parse(subtitle?.dataset.subtitles ?? "[]")
+  
   let subtitleIndex = 0;
-  const subtitles = ["Math", "Data", "Languages", "Everything"];
 
   function changeSubtitle() {
     if (!subtitle) return;
@@ -175,16 +184,16 @@ const t = useTranslations(lang);
   changeSubtitle();
   setInterval(changeSubtitle, 1000);
 
-  // handle greetings loop
+
+
+  // GREETINGS LOOP HANDLER
 
   const greeting = document.getElementById("greeting");
   const hand = document.getElementById("hand");
+  
+  const greetings: string[] = ["Ciao!", "Hi there!", "Salut!", "Hallo!", "你好！"];
+  let greetingIndex: number = 0;
 
-  const chineseGreeting = "你好！";
-
-  const greetings = ["Ciao!", "Hi there!", "Salut!", "Hallo!", chineseGreeting];
-
-  let greetingIndex = 0;
   let hideTimer: number | undefined;
 
   const visibleDuration = 500;
@@ -194,34 +203,34 @@ const t = useTranslations(lang);
       clearTimeout(hideTimer);
 
       const isDisplayed = greeting.style.display !== "none";
-
+      
       const text = greetings[greetingIndex];
-
       greeting.textContent = text;
-      greeting.classList.toggle("chinese", text === "你好！");
+      greeting.classList.toggle("chinese", text === "你好！"); // coupled to CSS, it makes the Hanzi text bolder
 
-      greetingIndex = (greetingIndex + 1) % greetings.length;
+      greetingIndex = (greetingIndex + 1) % greetings.length!; // text cycle
 
+      // conditional rendering
       if (!isDisplayed) {
         greeting.style.display = "inline-block";
         greeting.classList.remove("visible");
-
-        void greeting.offsetWidth;
+        // force the browser to do a synchronous recalculation to restart the CSS transition witut batgreeting.offsetWidth; // returns undefined, don't care!
         greeting.classList.add("visible");
+        
       } else {
         greeting.classList.add("visible");
       }
 
+      // set the timer for the text to disappear
       hideTimer = setTimeout(() => {
         greeting.classList.remove("visible");
       }, visibleDuration);
     });
 
+
+    // remove text at the end of the transition when it is no more visible
     greeting.addEventListener("transitionend", (event) => {
-      if (
-        event.propertyName === "opacity" &&
-        !greeting.classList.contains("visible")
-      ) {
+      if (event.propertyName === "opacity" && !greeting.classList.contains("visible")) {
         greeting.style.display = "none";
       }
     });

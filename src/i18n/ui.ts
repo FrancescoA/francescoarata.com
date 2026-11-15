@@ -9,9 +9,9 @@ export const ui = {
   },
   
   "home.introduction.kilobytes": {
-    en: "My 44 KB piece of Internet!",
-    it: "I miei 44 KB di Internet!",
-    fr: "Mes 44 KB de l'Internet!"
+    en: "My Internet bonsai!",
+    it: "Il mio bonsai di Internet!",
+    fr: "Mon bonsaï virtuel!"
   },
 
   "home.introduction.math": {
