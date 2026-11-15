@@ -1,3 +1,29 @@
 ---
 // root redirection page to the default language subdomain
 ---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="refresh" content="0;url=/en/"/>
+
+    <style>
+      html {
+          background-color: #000000;
+      }
+      body > p {
+        color: #ffffff;
+      }
+    </style>
+
+    <script is:inline>
+        window.location.replace("/en/");
+    </script>
+
+  </head>
+</html>
+
+<body>
+  <p>Please wait a millisecond...</p>
+</body>
