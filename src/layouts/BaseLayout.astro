@@ -7,6 +7,7 @@ import ScrollButton from "../components/ScrollButton.astro";
 import {Font} from "astro:assets";
 
 import {getLang} from "../i18n/utils";
+import DescriptionPanel from "../components/DescriptionPanel.astro";
 
 interface Props {
     title: string;
@@ -45,6 +46,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 			</main>
 
 			<ScrollButton />
+			<DescriptionPanel />
 			<Footer />
 
 	</body>

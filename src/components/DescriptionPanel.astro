@@ -1,0 +1,95 @@
+---
+
+---
+
+
+<div id="description-panel">test</div>
+
+<style>
+
+  #description-panel {
+    background: rgb(185, 185, 185);
+    border: #4f95ff56;
+    border-radius: .3rem;
+    font-family: monospace;
+    width: 8rem;
+    height: 3rem;
+    position: fixed;
+    text-align: center;
+    line-height: 3rem;
+    bottom: 2rem;
+    left: 2rem;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-8px);
+
+    transition:
+      opacity 0.25s ease,
+      transform 0.25s ease,
+      visibility 0s linear 0.25s;
+
+    pointer-events: none;
+    z-index: 999;
+  }
+
+  #description-panel.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+    transition-delay: 0s;
+  }
+
+</style>
+
+<script>
+  
+  let hideDescription = () => {
+      panel!.textContent = ""
+      panel!.classList.remove("visible")
+  }
+
+  let showDescription = (trigger: HTMLElement) => {
+      const description = trigger.dataset.description
+      if (!description) return
+
+      panel!.textContent = description
+      panel!.classList.add("visible")
+  }
+
+  const panel = document.getElementById("description-panel")
+
+  if (panel) {
+    document.addEventListener("pointerover", event => {
+      if (!(event.target instanceof Element)) return null
+      if (event.pointerType === "touch") return
+
+      // in the case of nested elements target just the one that has the description tag
+      const trigger = event.target.closest<HTMLElement>("[data-description]")
+      if (!trigger) return
+      
+      showDescription(trigger)
+    })
+
+
+      document.addEventListener("pointerout", event => {
+      if (!(event.target instanceof Element)) return null
+      if (event.pointerType === "touch") return
+
+      const trigger = event.target.closest<HTMLElement>("[data-description]")
+      if (!trigger) return
+      if (event.relatedTarget instanceof Node && trigger.contains(event.relatedTarget)) return
+
+      const description = trigger.dataset.description
+      if (!description) return
+      
+      hideDescription()
+
+    })
+  }
+
+  window.addEventListener("scroll", hideDescription, {
+    capture: true,
+    passive: true
+  });
+
+</script>
